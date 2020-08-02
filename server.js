@@ -24,7 +24,22 @@ app.get("/", (req, res) => {
   res.send(index.html);
 });
 
+app.get("/exercise", (req, res) => {
+      res.send(exercise.html)
+});
+
+app.get("/exercise/:id", (req, res) => {
+  db.workouts.findOne({ _id: mongojs.ObjectID(req.params.id) }, (error, data) => {
+    if (error) {
+      console.log(error)
+    } else {
+      res.send(exercise.html)
+    }
+  })
+});
+
+
 // Listen on port 3000
-app.listen(3000, () => {
-  console.log("App running on port 3000!");
+app.listen(8080, () => {
+  console.log("App running on port 8080!");
 });
